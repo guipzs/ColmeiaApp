@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+body{
+    pad: 0;
+    margin: 0;
+    border: 0;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+}
+header{
+    background-color: rgb(64, 145, 62);
+    margin: 0;
+    padding: 0;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    flex-direction: column;
+    width: 100vw;
+}
+h2{
+    font-family: 'Roboto', 'monospace';
+    color: whitesmoke;
+    font-weight: 800;
+    font-size: 35px;
+}
+a{
+    margin-left: 15px;
+    color: black;
+    font-family: 'Roboto', 'monospace';
+    text-decoration: none;
+}
+a:hover{
+    margin-left: 15px;
+    color: black;
+    font-family: 'Roboto', 'monospace';
+    text-decoration: underline;
+}
+.aba{
+    background-color: rgb(180, 209, 180);
+    margin: 0;
+    display: flex;
+    width: 100vw;
+}
+
+.trabalhador{
+    border-radius: 20px;
+    width: 500px;
+    height: 400px;
+    background-color: whitesmoke;
+    border: 1px solid black;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+}
+.trabalhador img{
+    width: 500px;
+    height: 280px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom: 1px solid black;
+}
+button{
+    background-color: rgb(69, 152, 219);
+    border: none;
+    border-radius: 10px;
+    width: 200px;
+    height: 50px;
+    box-shadow: 0 5px rgb(109, 185, 247);
+}
+button:hover{
+    background-color: rgb(109, 185, 247);
+    box-shadow: none;
+    margin-top: 5px;
+}
+p, h4{
+    font-family: 'Roboto', 'monospace';
+}
+h4{
+    margin: 0;
+    margin-top: 10px;
+    margin-bottom: 12px;
+}
