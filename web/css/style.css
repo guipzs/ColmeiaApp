@@ -7,16 +7,20 @@ body{
     align-items: center;
     align-content: center;
     flex-direction: column;
+    background-color: rgb(39, 39, 39);
 }
 header{
-    background-color: rgb(64, 145, 62);
+    background: #ffb829;
+    background: linear-gradient(142deg, rgba(255, 184, 41, 1) 0%, rgba(255, 225, 0, 1) 100%);
     margin: 0;
     padding: 0;
-    height: 100px;
+    height: 250px;
     display: flex;
     align-items: center;
     align-content: center;
     text-align: center;
+    border-bottom-left-radius: 10%;
+    border-bottom-right-radius: 10%;
     flex-direction: column;
     width: 100vw;
 }
@@ -24,25 +28,21 @@ h2{
     font-family: 'Roboto', 'monospace';
     color: whitesmoke;
     font-weight: 800;
-    font-size: 35px;
+    font-size: 55px;
+    margin-bottom: 0px;
 }
-a{
-    margin-left: 15px;
-    color: black;
+h3{
     font-family: 'Roboto', 'monospace';
-    text-decoration: none;
+    color: whitesmoke;
+    font-weight: 800;
+    font-size: 20px;
+    margin-bottom: 0px;
 }
-a:hover{
-    margin-left: 15px;
-    color: black;
+p{
     font-family: 'Roboto', 'monospace';
-    text-decoration: underline;
-}
-.aba{
-    background-color: rgb(180, 209, 180);
-    margin: 0;
-    display: flex;
-    width: 100vw;
+    color: whitesmoke;
+    font-weight: 800;
+    font-size: 15px;
 }
 
 .trabalhador{
