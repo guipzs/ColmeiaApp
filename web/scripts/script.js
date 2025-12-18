@@ -13,3 +13,12 @@ botoes.forEach(botao => {
         }
     });
 });
+
+function atualizarTextoServicos() {
+        const total = document.querySelectorAll('.trabalhador').length;
+        
+        const elementoNumero = document.getElementById('quantidade');
+        
+        elementoNumero.textContent = total;
+    }
+    window.onload = atualizarTextoServicos;
