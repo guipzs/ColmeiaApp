@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comeia App | Premium Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg: #f8f9fd;
+            --surface: rgba(255, 255, 255, 0.8);
+            --card-bg: #ffffff;
+            --text: #0f172a;
+            --primary: #fbbf24;
+            --primary-glow: rgba(251, 191, 36, 0.4);
+            --secondary: #6366f1;
+            --border: rgba(0, 0, 0, 0.05);
+        }
+
+        [data-theme="dark"] {
+            --bg: #050505;
+            --surface: rgba(20, 20, 20, 0.7);
+            --card-bg: #121212;
+            --text: #f1f5f9;
+            --primary: #fffc00;
+            --primary-glow: rgba(255, 252, 0, 0.2);
+            --border: rgba(255, 255, 255, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            transition: background 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* --- BACKGROUND DECOR --- */
+        .glow-spot {
+            position: fixed;
+            width: 40vw;
+            height: 40vw;
+            background: var(--primary-glow);
+            filter: blur(120px);
+            border-radius: 50%;
+            z-index: -1;
+            top: -10%;
+            right: -10%;
+            pointer-events: none;
+        }
+
+        /* --- THEME TOGGLE --- */
+        .theme-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            background: var(--text);
+            color: var(--bg);
+            border: none;
+            width: 55px;
+            height: 55px;
+            border-radius: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        /* --- HEADER --- */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--surface);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border);
+            padding: 15px 0;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text);
+            font-family: 'Syncopate', sans-serif;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .logo-box {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            box-shadow: 0 4px 12px var(--primary-glow);
+        }
+
+        /* --- HERO --- */
+        .hero {
+            padding: 100px 20px 60px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            letter-spacing: -2px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero span {
+            color: var(--primary);
+            text-shadow: 0 0 30px var(--primary-glow);
+        }
+
+        /* --- GRID --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        /* --- PREMIUM CARD --- */
+        .card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: fadeInUp 0.6s ease backwards;
+        }
+
+        .card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.2);
+            border-color: var(--primary);
+        }
+
+        .img-container {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s;
+        }
+
+        .card:hover .card-img {
+            transform: scale(1.1);
+        }
+
+        .category-tag {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+            color: #fff;
+            padding: 5px 12px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .card-content h3 {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        .card-content p {
+            color: var(--text);
+            opacity: 0.6;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        .btn-premium {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            background: var(--text);
+            color: var(--bg);
+            text-align: center;
+            text-decoration: none;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .card:hover .btn-premium {
+            background: var(--primary);
+            color: #000;
+        }
+
+        /* --- PROFILE VIEW --- */
+        #profile-page { display: none; }
+
+        .profile-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            background: var(--card-bg);
+            border-radius: 32px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            margin-top: 20px;
+        }
+        .profile-side-img {
+            flex: 1 1 400px;
+            min-height: 400px;
+        }
+
+        .profile-side-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-details {
+            flex: 1.5 1 300px;
+            padding: clamp(20px, 5vw, 60px);
+        }
+
+        .social-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 40px;
+        }
+
+        .social-grid a {
+            flex: 1 1 200px;
+            text-decoration: none;
+        }
+
+        .btn-contact {
+            width: 100%;
+            padding: 18px;
+            border-radius: 18px;
+            border: 2px solid var(--border);
+            background: transparent;
+            color: var(--text);
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: 0.3s;
+        }
+        a {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-contact:hover {
+            border-color: var(--primary);
+            background: var(--primary-glow);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 850px) {
+            .profile-wrapper { grid-template-columns: 1fr; }
+            .profile-side-img { height: 300px; }
+            .profile-details { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glow-spot"></div>
+
+    <button class="theme-toggle" onclick="toggleTheme()">
+        <i id="theme-icon" class="fas fa-sun"></i>
+    </button>
+
+    <header>
+        <div class="nav-content">
+            <a href="#" class="logo" onclick="showHome()">
+                <div class="logo-box">
+                    <i class="fas fa-hexagon-nodes">🐝</i>
+                </div>
+                COMEIA
+            </a>
+            <div style="font-weight: 800; font-size: 0.8rem; opacity: 0.5;">PEDRO II, PI</div>
+        </div>
+    </header>
+
+    <main id="home-page">
+        <section class="hero">
+            <h1>Contrate o<br><span>Melhor de Pedro II</span></h1>
+            <p style="max-width: 600px; margin: 0 auto; opacity: 0.6; font-weight: 500;">
+                Conectando você aos talentos e serviços essenciais da nossa comunidade.
+            </p>
+        </section>
+
+        <div class="container">
+            <div class="grid">
+                <div class="card" style="animation-delay: 0.1s;">
+                    <div class="img-container">
+                        <span class="category-tag">Alimentos</span>
+                        <img src="naylton.jpeg" class="card-img">
+                    </div>
+                    <div class="card-content">
+                        <h3>Francisco Apicultor</h3>
+                        <p>Produção de mel orgânico e derivados com selo de pureza.</p>
+                        <a href="#" class="btn-premium" onclick="showProfile()">VER PERFIL COMPLETO</a>
+                    </div>
+                </div>
+
+                <div class="card" style="animation-delay: 0.2s;">
+                    <div class="img-container">
+                        <span class="category-tag">Mecânica</span>
+                        <img src="https://images.unsplash.com/photo-1486006920555-c77dcf18193c?auto=format&fit=crop&q=80&w=500" class="card-img">
+                    </div>
+                    <div class="card-content">
+                        <h3>Richarllyson Mecânico</h3>
+                        <p>Especialista em reparos de alta precisão e elétrica automotiva.</p>
+                        <a href="#" class="btn-premium">VER PERFIL COMPLETO</a>
+                    </div>
+                </div>
+
+                <div class="card" style="animation-delay: 0.3s;">
+                    <div class="img-container">
+                        <span class="category-tag">Agricultura</span>
+                        <img src="https://images.unsplash.com/photo-1592419044706-39796d40f98c?auto=format&fit=crop&q=80&w=500" class="card-img">
+                    </div>
+                    <div class="card-content">
+                        <h3>Victor Marcos</h3>
+                        <p>Hortaliças frescas colhidas diariamente sob encomenda.</p>
+                        <a href="#" class="btn-premium">VER PERFIL COMPLETO</a>
+                    </div>
+                </div>
+
+                <div class="card" style="animation-delay: 0.4s;">
+                    <div class="img-container">
+                        <span class="category-tag">Arte</span>
+                        <img src="https://media.istockphoto.com/id/515264580/pt/foto/positivo-forma-negativa.jpg?s=612x612&w=0&k=20&c=QkcnBgrbG0h6RJ-jmZU-7RwkYZXJeaBbFkiy5ZVCaDA=" class="card-img">
+                    </div>
+                    <div class="card-content">
+                        <h3>Márcio Vito</h3>
+                        <p>Esculturas em opala e madeira. Arte exclusiva de Pedro II.</p>
+                        <a href="#" class="btn-premium">VER PERFIL COMPLETO</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <main id="profile-page" class="container">
+        <button onclick="showHome()" style="background:none; border:none; color:var(--text); cursor:pointer; font-weight:800; margin-bottom: 25px; display: flex; align-items:center; gap: 8px;">
+            <i class="fas fa-arrow-left"></i> VOLTAR PARA O EXPLORAR
+        </button>
+
+        <div class="profile-wrapper">
+            <div class="profile-side-img">
+                <img src="naylton.jpeg">
+            </div>
+            <div class="profile-details">
+                <h2 style="font-size: 3rem; font-weight: 800; margin-bottom: 15px;">Francisco Naylton</h2>
+                <p style="font-size: 1.1rem; line-height: 1.8; opacity: 0.7;">
+                    Referência em apicultura sustentável. Três anos dedicados ao manejo cuidadoso de colmeias na região serrana de Pedro II, produzindo o mel mais premiado da cidade.
+                </p>
+                
+                <div class="social-grid">
+                    <a href="https://api.whatsapp.com/send/?phone=558681252985&text&type=phone_number&app_absent=0"><button class="btn-contact"><i class="fab fa-whatsapp"></i> CONVERSAR AGORA</button></a>
+                    <a href="https://www.instagram.com/naylton_gomes_/"><button class="btn-contact"><i class="fab fa-instagram"></i> VER TRABALHOS</button></a>
+                </div>
+
+                <div style="margin-top: 40px; padding-top: 30px; border-top: 1px solid var(--border);">
+                    <p style="font-weight: 800; margin-bottom: 15px;">AVALIAÇÕES DA COMUNIDADE</p>
+                    <div style="background: var(--bg); padding: 20px; border-radius: 20px;">
+                        <div style="color: var(--primary); margin-bottom: 8px;">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p style="font-size: 0.9rem; font-style: italic;">"O mel de caju dele é incomparável. Recomendo muito!" - João Silva</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function toggleTheme() {
+            const body = document.documentElement;
+            const icon = document.getElementById('theme-icon');
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                icon.className = 'fas fa-moon';
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                icon.className = 'fas fa-sun';
+            }
+        }
+
+        function showProfile() {
+            document.getElementById('home-page').style.display = 'none';
+            document.getElementById('profile-page').style.display = 'block';
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        function showHome() {
+            document.getElementById('home-page').style.display = 'block';
+            document.getElementById('profile-page').style.display = 'none';
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+    </script>
+</body>
+</html>
